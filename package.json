@@ -4,8 +4,9 @@
   "description": "",
   "main": "build/index.js",
   "scripts": {
+    "bump": "hi-bump",
     "start": "scripts/watch.sh",
-    "bump": "hi-bump"
+    "test": "mocha --compilers js:babel/register --recursive --watch test/*.js"
   },
   "repository": {
     "type": "git",
@@ -26,10 +27,16 @@
     "babel-plugin-object-assign": "^1.1.0",
     "babelify": "^6.1.2",
     "hi-bump": "^1.0.0",
+    "jsdom": "^5.6.1",
+    "mocha": "^2.2.5",
+    "mockery": "^1.4.0",
+    "should": "^7.0.2",
+    "testdom": "^1.1.0",
     "watchify": "^3.2.2"
   },
   "dependencies": {
     "hire-forms-options": "^1.0.0",
-    "hire-forms-prop-types": "^1.0.0"
+    "hire-forms-prop-types": "^1.0.0",
+    "hire-forms-utils": "^1.0.2"
   }
 }
