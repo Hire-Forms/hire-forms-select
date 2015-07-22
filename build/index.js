@@ -326,44 +326,109 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var elementOrArrayOfElement = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.element, _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.element)]);
-
-exports.elementOrArrayOfElement = elementOrArrayOfElement;
-/**
- * A string or an object,
- * example: {key: "somekey", value: "somevalue"}.
- */
-var stringOrKeyValue = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.shape({
-	key: _react2["default"].PropTypes.string,
-	value: _react2["default"].PropTypes.string
-})]);
-
-exports.stringOrKeyValue = stringOrKeyValue;
 var stringOrArray = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.array]);
 
 exports.stringOrArray = stringOrArray;
-var stringOrArrayOfString = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.string)]);
-
-exports.stringOrArrayOfString = stringOrArrayOfString;
-var arrayOfKeyValue = _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.shape({
+var keyValueMap = _react2["default"].PropTypes.shape({
 	key: _react2["default"].PropTypes.string.isRequired,
 	value: _react2["default"].PropTypes.string.isRequired
-}));
+});
 
-exports.arrayOfKeyValue = arrayOfKeyValue;
-/**
- * An array of strings or an array of key/value objects,
- * example: [{key: "somekey", value: "somevalue"}].
- */
-var arrayOfStringOrArrayOfKeyValue = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.string), _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.shape({
-	key: _react2["default"].PropTypes.string,
-	value: _react2["default"].PropTypes.string
-}))]);
-exports.arrayOfStringOrArrayOfKeyValue = arrayOfStringOrArrayOfKeyValue;
+exports.keyValueMap = keyValueMap;
+var arrayOfKeyValueMaps = _react2["default"].PropTypes.arrayOf(keyValueMap);
+
+exports.arrayOfKeyValueMaps = arrayOfKeyValueMaps;
+var arrayOfStrings = _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.string);
+
+exports.arrayOfStrings = arrayOfStrings;
+var arrayOfElements = _react2["default"].PropTypes.arrayOf(_react2["default"].PropTypes.element);
+
+exports.arrayOfElements = arrayOfElements;
+var stringOrKeyValueMap = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, keyValueMap]);
+
+exports.stringOrKeyValueMap = stringOrKeyValueMap;
+var elementOrArrayOfElement = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.element, arrayOfElements]);
+
+exports.elementOrArrayOfElement = elementOrArrayOfElement;
+var arrayOfStringsOrArrayOfKeyValueMaps = _react2["default"].PropTypes.oneOfType([arrayOfStrings, arrayOfKeyValueMaps]);
+
+exports.arrayOfStringsOrArrayOfKeyValueMaps = arrayOfStringsOrArrayOfKeyValueMaps;
+var stringOrArrayOfStrings = _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.string, arrayOfStrings]);
+exports.stringOrArrayOfStrings = stringOrArrayOfStrings;
 
 },{"react":"react"}],3:[function(require,module,exports){
 arguments[4][2][0].apply(exports,arguments)
 },{"dup":2,"react":"react"}],4:[function(require,module,exports){
+
+/*
+ * @param {Array} list
+ * @returns {Boolean}
+ */
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.isListOfStrings = isListOfStrings;
+exports.isKeyValueMap = isKeyValueMap;
+exports.castArray = castArray;
+exports.castKeyValueArray = castKeyValueArray;
+
+function isListOfStrings(list) {
+	if (!Array.isArray(list) || !list.length) {
+		return false;
+	}
+
+	return list.every(function (item) {
+		return typeof item === "string";
+	});
+}
+
+/*
+ * @param {Object} map
+ * @returns {Boolean}
+ */
+
+function isKeyValueMap(map) {
+	if (map == null) {
+		return false;
+	}
+
+	return map.hasOwnProperty("key") && map.hasOwnProperty("value");
+}
+
+/*
+ * Always return an array.
+ *
+ * @param {String|Array} arr
+ * @returns {Array}
+ */
+
+function castArray(arr) {
+	return Array.isArray(arr) ? arr : [arr];
+}
+
+;
+
+/*
+ * Always return an array of key/value maps.
+ *
+ * @param {Number|String|Boolean|Array} list
+ * @returns {Array} Array of key value maps, ie: [{key: "A", value: "A"}, {key: "B", value: "B"}, ...]
+ */
+
+function castKeyValueArray(list) {
+	list = castArray(list);
+
+	return list.map(function (item) {
+		return isKeyValueMap(item) ? item : {
+			key: item,
+			value: item
+		};
+	});
+}
+
+},{}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -394,6 +459,8 @@ var _hireFormsOptions2 = _interopRequireDefault(_hireFormsOptions);
 
 var _hireFormsPropTypes = require("hire-forms-prop-types");
 
+var _hireFormsUtils = require("hire-forms-utils");
+
 var Select = (function (_React$Component) {
 	function Select(props) {
 		_classCallCheck(this, Select);
@@ -406,26 +473,6 @@ var Select = (function (_React$Component) {
 	_inherits(Select, _React$Component);
 
 	_createClass(Select, [{
-		key: "isListOfStrings",
-		value: function isListOfStrings(list) {
-			return list.length && typeof list[0] === "string";
-		}
-	}, {
-		key: "isKeyValueMap",
-		value: function isKeyValueMap(map) {
-			return map.hasOwnProperty("key") && map.hasOwnProperty("value");
-		}
-	}, {
-		key: "stringArray2KeyValueArray",
-		value: function stringArray2KeyValueArray(list) {
-			return list.map(function (item) {
-				return {
-					key: item,
-					value: item
-				};
-			});
-		}
-	}, {
 		key: "handleInputClick",
 		value: function handleInputClick() {
 			this.setState({ visible: !this.state.visible });
@@ -440,9 +487,8 @@ var Select = (function (_React$Component) {
 		value: function handleOptionsChange(value) {
 			this.setState({ visible: false });
 
-			// If the options prop is an array of strings,
-			// return a string.
-			if (this.isListOfStrings(this.props.options)) {
+			// If the options prop is an array of strings, return a string.
+			if ((0, _hireFormsUtils.isListOfStrings)(this.props.options)) {
 				value = value.value;
 			}
 
@@ -455,19 +501,17 @@ var Select = (function (_React$Component) {
 			    options = undefined;
 
 			if (this.state.visible) {
-				optionValues = this.isListOfStrings(this.props.options) ? this.stringArray2KeyValueArray(this.props.options) : this.props.options;
-
 				options = _react2["default"].createElement(_hireFormsOptions2["default"], {
 					onChange: this.handleOptionsChange.bind(this),
 					sortRelevance: this.props.sortRelevance,
-					values: optionValues });
+					values: (0, _hireFormsUtils.castKeyValueArray)(this.props.options) });
 			}
 
-			var value = this.props.value === "" ? this.props.placeholder : this.props.value;
+			// If value prop is a key/value map, extract the value.
+			var value = (0, _hireFormsUtils.isKeyValueMap)(this.props.value) ? this.props.value.value : this.props.value;
 
-			if (this.isKeyValueMap(this.props.value)) {
-				value = this.props.value.value;
-			}
+			// Create new var so we can check value in cx()
+			var inputValue = value === "" ? this.props.placeholder : value;
 
 			return _react2["default"].createElement(
 				"div",
@@ -481,8 +525,8 @@ var Select = (function (_React$Component) {
 						"div",
 						{ className: (0, _classnames2["default"])({
 								"input": true,
-								"placeholder": this.props.value === "" }) },
-						value
+								"placeholder": value === "" }) },
+						inputValue
 					),
 					_react2["default"].createElement(
 						"button",
@@ -505,14 +549,14 @@ Select.defaultProps = {
 
 Select.propTypes = {
 	onChange: _react2["default"].PropTypes.func.isRequired,
-	options: _hireFormsPropTypes.arrayOfStringOrArrayOfKeyValue,
+	options: _hireFormsPropTypes.arrayOfStringsOrArrayOfKeyValueMaps,
 	placeholder: _react2["default"].PropTypes.string,
 	sortRelevance: _react2["default"].PropTypes.bool,
-	value: _hireFormsPropTypes.stringOrKeyValue
+	value: _hireFormsPropTypes.stringOrKeyValueMap
 };
 
 exports["default"] = Select;
 module.exports = exports["default"];
 
-},{"classnames":"classnames","hire-forms-options":1,"hire-forms-prop-types":3,"react":"react"}]},{},[4])(4)
+},{"classnames":"classnames","hire-forms-options":1,"hire-forms-prop-types":3,"hire-forms-utils":4,"react":"react"}]},{},[5])(5)
 });

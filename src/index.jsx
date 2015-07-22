@@ -2,28 +2,14 @@ import React from "react";
 import cx from "classnames";
 
 import Options from "hire-forms-options";
-import {stringOrKeyValue, arrayOfStringOrArrayOfKeyValue} from "hire-forms-prop-types";
+import {stringOrKeyValueMap, arrayOfStringsOrArrayOfKeyValueMaps} from "hire-forms-prop-types";
+import {isKeyValueMap, isListOfStrings, castKeyValueArray} from "hire-forms-utils";
 
 class Select extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {visible: false};
-	}
-
-	isListOfStrings(list) {
-		return list.length && (typeof list[0] === "string");
-	}
-
-	isKeyValueMap(map) {
-		return map.hasOwnProperty("key") && map.hasOwnProperty("value");
-	}
-
-	stringArray2KeyValueArray(list) {
-		return list.map((item) => ({
-			key: item,
-			value: item
-		}));
 	}
 
 	handleInputClick() {
@@ -37,9 +23,8 @@ class Select extends React.Component {
 	handleOptionsChange(value) {
 		this.setState({visible: false});
 
-		// If the options prop is an array of strings,
-		// return a string.
-		if (this.isListOfStrings(this.props.options)) {
+		// If the options prop is an array of strings, return a string.
+		if (isListOfStrings(this.props.options)) {
 			value = value.value;
 		}
 
@@ -50,25 +35,23 @@ class Select extends React.Component {
 		let optionValues, options;
 
 		if (this.state.visible) {
-			optionValues = this.isListOfStrings(this.props.options) ?
-				this.stringArray2KeyValueArray(this.props.options) :
-				this.props.options;
-
 			options = (
 				<Options
 					onChange={this.handleOptionsChange.bind(this)}
 					sortRelevance={this.props.sortRelevance}
-					values={optionValues} />
+					values={castKeyValueArray(this.props.options)} />
 			);
 		}
 
-		let value = (this.props.value === "") ?
-			this.props.placeholder :
+		// If value prop is a key/value map, extract the value.
+		let value = isKeyValueMap(this.props.value) ?
+			this.props.value.value :
 			this.props.value;
 
-		if (this.isKeyValueMap(this.props.value)) {
-			value = this.props.value.value;
-		}
+		// Create new var so we can check value in cx()
+		let inputValue = (value === "") ?
+			this.props.placeholder :
+			value;
 
 		return (
 			<div className="hire-select">
@@ -77,8 +60,8 @@ class Select extends React.Component {
 					onClick={this.handleInputClick.bind(this)}>
 					<div className={cx({
 						"input": true,
-						"placeholder": this.props.value === ""})}>
-						{value}
+						"placeholder": value === ""})}>
+						{inputValue}
 					</div>
 					<button>▾</button>
 				</div>
@@ -95,10 +78,10 @@ Select.defaultProps = {
 
 Select.propTypes = {
 	onChange: React.PropTypes.func.isRequired,
-	options: arrayOfStringOrArrayOfKeyValue,
+	options: arrayOfStringsOrArrayOfKeyValueMaps,
 	placeholder: React.PropTypes.string,
 	sortRelevance: React.PropTypes.bool,
-	value: stringOrKeyValue
+	value: stringOrKeyValueMap
 };
 
 export default Select;
