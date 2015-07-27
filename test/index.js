@@ -73,4 +73,35 @@ describe("Hire Forms Select", function() {
 		input.props.className.should.equal("input");
 		input.props.children.should.equal("Selected value")
 	});
+
+	describe("With async prop", function() {
+		it("Should load options from async func", function(done) {
+			let getOptions = function(done) {
+				done(["monad", "monoid", "functor"]);
+			}
+
+			let renderedComponent = TestUtils.renderIntoDocument(
+				<Select
+					async={getOptions}
+					onChange={function() {}}
+					/>
+			);
+
+			let inputContainer = TestUtils.findRenderedDOMComponentWithClass(
+				renderedComponent,
+				'input-container'
+			);
+
+			setTimeout(function() {
+				TestUtils.Simulate.click(inputContainer);
+
+				TestUtils.scryRenderedDOMComponentsWithClass(
+					renderedComponent,
+					'hire-forms-option'
+				).length.should.equal(3);
+
+				done();
+			}, 50);
+		});
+	})
 });

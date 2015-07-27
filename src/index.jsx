@@ -9,11 +9,27 @@ class Select extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {visible: false};
+		this.state = {
+			options: props.options,
+			visible: false
+		};
+	}
+
+	componentDidMount() {
+		if (this.props.async != null) {
+			this.props.async((response) => {
+				this.setState({
+					options: response
+				});
+			});
+		}
 	}
 
 	handleInputClick() {
-		this.setState({visible: !this.state.visible});
+		// Visible state shouldn't change when there are no options.
+		if (this.state.options.length > 0) {
+			this.setState({visible: !this.state.visible});
+		}
 	}
 
 	/**
@@ -24,7 +40,7 @@ class Select extends React.Component {
 		this.setState({visible: false});
 
 		// If the options prop is an array of strings, return a string.
-		if (isListOfStrings(this.props.options)) {
+		if (isListOfStrings(this.state.options)) {
 			value = value.value;
 		}
 
@@ -39,7 +55,7 @@ class Select extends React.Component {
 				<Options
 					onChange={this.handleOptionsChange.bind(this)}
 					sortRelevance={this.props.sortRelevance}
-					values={castKeyValueArray(this.props.options)} />
+					values={castKeyValueArray(this.state.options)} />
 			);
 		}
 
@@ -72,11 +88,12 @@ class Select extends React.Component {
 }
 
 Select.defaultProps = {
-	value: "",
-	options: []
+	options: [],
+	value: ""
 };
 
 Select.propTypes = {
+	async: React.PropTypes.func,
 	onChange: React.PropTypes.func.isRequired,
 	options: arrayOfStringsOrArrayOfKeyValueMaps,
 	placeholder: React.PropTypes.string,
