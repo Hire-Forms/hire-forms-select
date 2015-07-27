@@ -3,7 +3,7 @@ import cx from "classnames";
 
 import Options from "hire-forms-options";
 import {stringOrKeyValueMap, arrayOfStringsOrArrayOfKeyValueMaps} from "hire-forms-prop-types";
-import {isKeyValueMap, isListOfStrings, castKeyValueArray} from "hire-forms-utils";
+import {isKeyValueMap, isListOfStrings, castKeyValue, castKeyValueArray} from "hire-forms-utils";
 
 class Select extends React.Component {
 	constructor(props) {
@@ -54,7 +54,9 @@ class Select extends React.Component {
 			options = (
 				<Options
 					onChange={this.handleOptionsChange.bind(this)}
+					sort={this.props.sort}
 					sortRelevance={this.props.sortRelevance}
+					value={castKeyValue(this.props.value)}
 					values={castKeyValueArray(this.state.options)} />
 			);
 		}
@@ -97,6 +99,7 @@ Select.propTypes = {
 	onChange: React.PropTypes.func.isRequired,
 	options: arrayOfStringsOrArrayOfKeyValueMaps,
 	placeholder: React.PropTypes.string,
+	sort: React.PropTypes.bool,
 	sortRelevance: React.PropTypes.bool,
 	value: stringOrKeyValueMap
 };
