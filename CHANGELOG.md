@@ -1,3 +1,7 @@
+### v1.0.4	(2015/7/27 17:32)
+* Pass sort prop to options component
+* Add async prop
+
 ### v1.0.3	(2015/7/22 16:50)
 * Bump hi-bump
 * Add tests
