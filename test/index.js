@@ -1,40 +1,19 @@
-require('testdom')('<html><body></body></html>');
+var jsdom = require("jsdom").jsdom
+global.document = jsdom("<html><head><script></script></head><body></body></html>");
+global.window = document.defaultView;
+global.navigator = window.navigator
+global.HTMLElement = window.HTMLElement
 
-let React = require("react/addons");
+require("classlist-polyfill");
+
 let should = require("should");
 let Select = require("../build");
-
+let React = require("react/addons");
 let TestUtils = React.addons.TestUtils;
 
 describe("Hire Forms Select", function() {
 	it("Should be a ReactElement", function() {
-		TestUtils.isElement(<Select />).should.be.ok();
-	});
-
-	it("Should render <Options /> on click", function() {
-		let renderedComponent = TestUtils.renderIntoDocument(
-			<Select
-				options={["monad", "monoid", "functor"]}
-				onChange={function() {}}
-				/>
-		);
-
-		let inputContainer = TestUtils.findRenderedDOMComponentWithClass(
-			renderedComponent,
-			'input-container'
-		);
-
-		TestUtils.scryRenderedDOMComponentsWithClass(
-			renderedComponent,
-			'hire-options'
-		).length.should.equal(0);
-
-		TestUtils.Simulate.click(inputContainer);
-
-		TestUtils.scryRenderedDOMComponentsWithClass(
-			renderedComponent,
-			'hire-options'
-		).length.should.equal(1);
+		TestUtils.isElement(<Select onChange={function() {}} />).should.be.ok();
 	});
 
 	it("Should show a placeholder when value prop is empty", function() {
@@ -74,34 +53,58 @@ describe("Hire Forms Select", function() {
 		input.props.children.should.equal("Selected value")
 	});
 
-	describe("With async prop", function() {
-		it("Should load options from async func", function(done) {
-			let getOptions = function(done) {
-				done(["monad", "monoid", "functor"]);
-			}
+	it("Should render <Options /> on click", function() {
+		let renderedComponent = TestUtils.renderIntoDocument(
+			<Select
+				options={["monad", "monoid", "functor"]}
+				onChange={function() {}}
+				/>
+		);
 
-			let renderedComponent = TestUtils.renderIntoDocument(
-				<Select
-					async={getOptions}
-					onChange={function() {}}
-					/>
-			);
+		let inputContainer = TestUtils.findRenderedDOMComponentWithClass(
+			renderedComponent,
+			'input-container'
+		);
 
-			let inputContainer = TestUtils.findRenderedDOMComponentWithClass(
+		TestUtils.scryRenderedDOMComponentsWithClass(
+			renderedComponent,
+			'hire-options'
+		).length.should.equal(0);
+
+		TestUtils.Simulate.click(inputContainer);
+
+		TestUtils.scryRenderedDOMComponentsWithClass(
+			renderedComponent,
+			'hire-options'
+		).length.should.equal(1);
+	});
+
+	it("Should load options from async func", function(done) {
+		let getOptions = function(done) {
+			done(["monad", "monoid", "functor"]);
+		}
+
+		let renderedComponent = TestUtils.renderIntoDocument(
+			<Select
+				async={getOptions}
+				onChange={function() {}}
+				/>
+		);
+
+		let inputContainer = TestUtils.findRenderedDOMComponentWithClass(
+			renderedComponent,
+			'input-container'
+		);
+
+		setTimeout(function() {
+			TestUtils.Simulate.click(inputContainer);
+
+			TestUtils.scryRenderedDOMComponentsWithClass(
 				renderedComponent,
-				'input-container'
-			);
+				'hire-forms-option'
+			).length.should.equal(3);
 
-			setTimeout(function() {
-				TestUtils.Simulate.click(inputContainer);
-
-				TestUtils.scryRenderedDOMComponentsWithClass(
-					renderedComponent,
-					'hire-forms-option'
-				).length.should.equal(3);
-
-				done();
-			}, 50);
-		});
-	})
+			done();
+		}, 50);
+	});
 });
