@@ -16,6 +16,8 @@ class Select extends React.Component {
 	}
 
 	componentDidMount() {
+		document.addEventListener("click", this.handleDocumentClick.bind(this), false);
+
 		if (this.props.async != null) {
 			this.props.async((response) => {
 				this.setState({
@@ -25,7 +27,19 @@ class Select extends React.Component {
 		}
 	}
 
-	handleInputClick() {
+	componentWillUnmount() {
+		document.removeEventListener("click", this.handleDocumentClick.bind(this), false);
+	}
+
+	handleDocumentClick(ev) {
+		if (this.state.visible && !React.findDOMNode(this).contains(ev.target)) {
+			this.setState({
+				visible: false
+			});
+		}
+	}
+
+	handleInputClick(ev) {
 		// Visible state shouldn't change when there are no options.
 		if (this.state.options.length > 0) {
 			this.setState({visible: !this.state.visible});

@@ -596,6 +596,8 @@ var Select = (function (_React$Component) {
 		value: function componentDidMount() {
 			var _this = this;
 
+			document.addEventListener("click", this.handleDocumentClick.bind(this), false);
+
 			if (this.props.async != null) {
 				this.props.async(function (response) {
 					_this.setState({
@@ -605,8 +607,22 @@ var Select = (function (_React$Component) {
 			}
 		}
 	}, {
+		key: "componentWillUnmount",
+		value: function componentWillUnmount() {
+			document.removeEventListener("click", this.handleDocumentClick.bind(this), false);
+		}
+	}, {
+		key: "handleDocumentClick",
+		value: function handleDocumentClick(ev) {
+			if (this.state.visible && !_react2["default"].findDOMNode(this).contains(ev.target)) {
+				this.setState({
+					visible: false
+				});
+			}
+		}
+	}, {
 		key: "handleInputClick",
-		value: function handleInputClick() {
+		value: function handleInputClick(ev) {
 			// Visible state shouldn't change when there are no options.
 			if (this.state.options.length > 0) {
 				this.setState({ visible: !this.state.visible });
