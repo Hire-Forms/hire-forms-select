@@ -1,3 +1,6 @@
+### v1.0.6	(2015/8/10 17:11)
+* When receiving new props, transfer options to state
+
 ### v1.0.5	(2015/7/30 11:30)
 * Listen to clicks outside component to close options
 * Add test:watch to npm run
