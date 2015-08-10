@@ -607,6 +607,13 @@ var Select = (function (_React$Component) {
 			}
 		}
 	}, {
+		key: "componentWillReceiveProps",
+		value: function componentWillReceiveProps(nextProps) {
+			this.setState({
+				options: nextProps.options
+			});
+		}
+	}, {
 		key: "componentWillUnmount",
 		value: function componentWillUnmount() {
 			document.removeEventListener("click", this.handleDocumentClick.bind(this), false);

@@ -27,6 +27,12 @@ class Select extends React.Component {
 		}
 	}
 
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+			options: nextProps.options
+		});
+	}
+
 	componentWillUnmount() {
 		document.removeEventListener("click", this.handleDocumentClick.bind(this), false);
 	}
