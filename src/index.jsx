@@ -9,6 +9,8 @@ class Select extends React.Component {
 	constructor(props) {
 		super(props);
 
+		this.handleDocumentClick = this.handleDocumentClick.bind(this)
+
 		this.state = {
 			options: props.options,
 			visible: false
@@ -16,7 +18,7 @@ class Select extends React.Component {
 	}
 
 	componentDidMount() {
-		document.addEventListener("click", this.handleDocumentClick.bind(this), false);
+		document.addEventListener("click", this.handleDocumentClick, false);
 
 		if (this.props.async != null) {
 			this.props.async((response) => {
@@ -34,7 +36,7 @@ class Select extends React.Component {
 	}
 
 	componentWillUnmount() {
-		document.removeEventListener("click", this.handleDocumentClick.bind(this), false);
+		document.removeEventListener("click", this.handleDocumentClick, false);
 	}
 
 	handleDocumentClick(ev) {
