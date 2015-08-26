@@ -1,3 +1,6 @@
+### v1.0.8	(2015/8/26 12:45)
+* New build
+
 ### v1.0.7	(2015/8/26 11:30)
 * Fix removeEventListener by fixing function binding
 * Add derequire
