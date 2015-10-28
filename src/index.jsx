@@ -30,9 +30,11 @@ class Select extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.setState({
-			options: nextProps.options
-		});
+		if(nextProps.options && nextProps.options.length) {
+			this.setState({
+				options: nextProps.options
+			});
+		}
 	}
 
 	componentWillUnmount() {
