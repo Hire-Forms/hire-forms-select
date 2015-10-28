@@ -1,3 +1,6 @@
+### v1.0.10	(2015/10/28 12:53)
+
+
 ### v1.0.9	(2015/10/28 12:48)
 * only update options with componentWillReceiveProps when options is set and has length
 
