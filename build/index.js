@@ -202,7 +202,7 @@ var Options = (function (_React$Component) {
 	}, {
 		key: "componentWillUnmount",
 		value: function componentWillUnmount() {
-			var node = _react2["default"].findDOMNode(this);
+			var node = _reactDom2["default"].findDOMNode(this);
 			node.style.zIndex = 0;
 		}
 
@@ -273,7 +273,7 @@ var Options = (function (_React$Component) {
 		key: "unhighlight",
 		value: function unhighlight(className) {
 			var el = undefined;
-			var node = _react2["default"].findDOMNode(this);
+			var node = _reactDom2["default"].findDOMNode(this);
 
 			if (node) {
 				el = node.querySelector("li." + className);
@@ -304,7 +304,7 @@ var Options = (function (_React$Component) {
 			// Current is not found if there is no list item highlighted.
 			// Prev is not found if the first list item is highlighted.
 			if (!prev) {
-				prev = _react2["default"].findDOMNode(this).lastChild;
+				prev = _reactDom2["default"].findDOMNode(this).lastChild;
 			}
 
 			this.highlight(prev, this.props.highlightClass);
@@ -323,7 +323,7 @@ var Options = (function (_React$Component) {
 			// Current is not found if there is no list item highlighted.
 			// Next is not found if the last list item is highlighted.
 			if (!next) {
-				next = _react2["default"].findDOMNode(this).firstChild;
+				next = _reactDom2["default"].findDOMNode(this).firstChild;
 			}
 
 			this.highlight(next, this.props.highlightClass);
