@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import cx from "classnames";
 
 import Options from "hire-forms-options";
@@ -42,7 +43,7 @@ class Select extends React.Component {
 	}
 
 	handleDocumentClick(ev) {
-		if (this.state.visible && !React.findDOMNode(this).contains(ev.target)) {
+		if (this.state.visible && !ReactDOM.findDOMNode(this).contains(ev.target)) {
 			this.setState({
 				visible: false
 			});
