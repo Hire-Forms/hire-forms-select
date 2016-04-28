@@ -573,10 +573,6 @@ var _react = _dereq_("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = _dereq_("react-dom");
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
 var _classnames = _dereq_("classnames");
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -637,7 +633,7 @@ var Select = (function (_React$Component) {
 	}, {
 		key: "handleDocumentClick",
 		value: function handleDocumentClick(ev) {
-			if (this.state.visible && !_reactDom2["default"].findDOMNode(this).contains(ev.target)) {
+			if (this.state.visible && !this.refs.select.contains(ev.target)) {
 				this.setState({
 					visible: false
 				});
@@ -691,7 +687,7 @@ var Select = (function (_React$Component) {
 
 			return _react2["default"].createElement(
 				"div",
-				{ className: "hire-select" },
+				{ className: "hire-select", ref: "select" },
 				_react2["default"].createElement(
 					"div",
 					{
@@ -736,5 +732,5 @@ Select.propTypes = {
 exports["default"] = Select;
 module.exports = exports["default"];
 
-},{"classnames":"classnames","hire-forms-options":1,"hire-forms-prop-types":2,"hire-forms-utils":3,"react":"react","react-dom":"react-dom"}]},{},[4])(4)
+},{"classnames":"classnames","hire-forms-options":1,"hire-forms-prop-types":2,"hire-forms-utils":3,"react":"react"}]},{},[4])(4)
 });

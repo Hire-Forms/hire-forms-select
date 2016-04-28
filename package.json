@@ -1,6 +1,6 @@
 {
   "name": "hire-forms-select",
-  "version": "2.0.0",
+  "version": "1.0.10",
   "description": "",
   "main": "build/index.js",
   "scripts": {
@@ -21,8 +21,8 @@
   "homepage": "https://github.com/Hire-Forms/hire-forms-select",
   "peerDependencies": {
     "classnames": "^2.1.2",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1"
   },
   "devDependencies": {
     "babel": "^5.8.12",
@@ -39,7 +39,7 @@
     "watchify": "^3.3.0"
   },
   "dependencies": {
-    "hire-forms-options": "https://github.com/Hire-Forms/hire-forms-options.git#react-0.14",
+    "hire-forms-options": "^2.0.0",
     "hire-forms-prop-types": "https://github.com/Hire-Forms/hire-forms-prop-types.git#react-0.14",
     "hire-forms-utils": "^1.2.0"
   }
