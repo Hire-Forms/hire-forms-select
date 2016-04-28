@@ -1,3 +1,10 @@
+### v2.0.0	(2016/4/28 14:34)
+* Bump React to 15.0.1
+* using reactdom to locate a dom node
+* using reactdom to locate a dom node
+* using reactdom to locate a dom node
+* branch for react 0.14
+
 ### v1.0.10	(2015/10/28 12:53)
 
 
