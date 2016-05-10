@@ -1,3 +1,6 @@
+### v2.2.0	(2016/5/10 10:18)
+* Add method for hiding <Options/>
+
 ### v2.1.0	(2016/5/10 7:44)
 * Pass children to <Options />
 * Update eslint
