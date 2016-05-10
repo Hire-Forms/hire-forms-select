@@ -1,3 +1,7 @@
+### v2.1.0	(2016/5/10 7:44)
+* Pass children to <Options />
+* Update eslint
+
 ### v2.0.0	(2016/4/28 14:34)
 * Bump React to 15.0.1
 * using reactdom to locate a dom node
