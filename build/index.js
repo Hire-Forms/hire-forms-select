@@ -761,6 +761,11 @@ var Select = (function (_React$Component) {
 			this.props.onChange(value);
 		}
 	}, {
+		key: 'hideOptions',
+		value: function hideOptions() {
+			this.setState({ visible: false });
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			var options = this.state.visible ? _react2['default'].createElement(
@@ -793,7 +798,7 @@ var Select = (function (_React$Component) {
 						'div',
 						{ className: (0, _classnames2['default'])({
 								"input": true,
-								"placeholder": value === "" }) },
+								"placeholder": value === '' }) },
 						inputValue
 					),
 					_react2['default'].createElement(

@@ -70,6 +70,10 @@ class Select extends React.Component {
 		this.props.onChange(value);
 	}
 
+	hideOptions() {
+		this.setState({ visible: false });
+	}
+
 	render() {
 		const options = this.state.visible ?
 			<Options
@@ -100,7 +104,7 @@ class Select extends React.Component {
 					onClick={this.handleInputClick.bind(this)}>
 					<div className={cx({
 						"input": true,
-						"placeholder": value === ""})}>
+						"placeholder": value === ''})}>
 						{inputValue}
 					</div>
 					<button>▾</button>
