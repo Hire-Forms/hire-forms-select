@@ -20,33 +20,36 @@
   },
   "homepage": "https://github.com/Hire-Forms/hire-forms-select",
   "peerDependencies": {
-    "classnames": "^2.1.2",
+    "classnames": "^2.2.5",
     "react": "^15.0.1",
     "react-dom": "^15.0.1"
   },
   "devDependencies": {
-    "babel": "^5.8.12",
-    "babel-core": "^5.8.12",
+    "babel": "^6.5.2",
+    "babel-cli": "^6.9.0",
+    "babel-core": "^6.9.0",
     "babel-eslint": "^6.0.4",
-    "babel-plugin-object-assign": "^1.2.1",
-    "babelify": "^6.1.3",
-    "classlist-polyfill": "^1.0.2",
-    "derequire": "^2.0.2",
-    "eslint": "^2.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-1": "^6.5.0",
+    "babelify": "^7.3.0",
+    "classlist-polyfill": "^1.0.3",
+    "derequire": "^2.0.3",
+    "eslint": "^2.10.2",
     "eslint-config-airbnb": "^9.0.1",
-    "eslint-plugin-import": "^1.7.0",
+    "eslint-plugin-import": "^1.8.0",
     "eslint-plugin-jsx-a11y": "^1.2.0",
-    "eslint-plugin-react": "^5.0.1",
+    "eslint-plugin-react": "^5.1.1",
     "hi-bump": "^1.1.1",
-    "jsdom": "^5.6.1",
-    "mocha": "^2.2.5",
-    "nodemon": "^1.4.0",
-    "should": "^7.0.2",
-    "watchify": "^3.3.0"
+    "jsdom": "^9.1.0",
+    "mocha": "^2.4.5",
+    "nodemon": "^1.9.2",
+    "should": "^8.3.2",
+    "watchify": "^3.7.0"
   },
   "dependencies": {
-    "hire-forms-options": "^2.0.0",
-    "hire-forms-prop-types": "https://github.com/Hire-Forms/hire-forms-prop-types.git#react-0.14",
+    "hire-forms-options": "^2.1.1",
+    "hire-forms-prop-types": "^2.0.1",
     "hire-forms-utils": "^1.2.0"
   }
 }

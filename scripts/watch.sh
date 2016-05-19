@@ -8,5 +8,5 @@ node_modules/.bin/watchify src/index.jsx \
   --external react-dom \
   --outfile 'node_modules/.bin/derequire > build/index.js' \
   --standalone HireFormsSelect \
-  --transform [ babelify --plugins object-assign ] \
+  --transform [ babelify --presets [ es2015 react stage-1 ] ] \
   --verbose

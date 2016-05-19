@@ -5,16 +5,10 @@ import { stringOrKeyValueMap, arrayOfStringsOrArrayOfKeyValueMaps } from 'hire-f
 import { isKeyValueMap, isListOfStrings, castKeyValue, castKeyValueArray } from 'hire-forms-utils';
 
 class Select extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.handleDocumentClick = this.handleDocumentClick.bind(this);
-
-		this.state = {
-			options: props.options,
-			visible: false,
-		};
-	}
+	state = {
+		options: this.props.options,
+		visible: false,
+	};
 
 	componentDidMount() {
 		document.addEventListener('click', this.handleDocumentClick, false);
@@ -28,11 +22,9 @@ class Select extends React.Component {
 		}
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.options && nextProps.options.length) {
-			this.setState({
-				options: nextProps.options,
-			});
+	componentWillReceiveProps({ options }) {
+		if (this.props.options !== options) {
+			this.setState({ options });
 		}
 	}
 
@@ -40,7 +32,7 @@ class Select extends React.Component {
 		document.removeEventListener('click', this.handleDocumentClick, false);
 	}
 
-	handleDocumentClick(ev) {
+	handleDocumentClick = (ev) => {
 		if (this.state.visible && !this.refs.select.contains(ev.target)) {
 			this.setState({
 				visible: false,
@@ -48,18 +40,15 @@ class Select extends React.Component {
 		}
 	}
 
-	handleInputClick(ev) {
-		// Visible state shouldn't change when there are no options.
-		if (this.state.options.length > 0) {
-			this.setState({ visible: !this.state.visible });
-		}
+	handleInputClick = (/* ev */) => {
+		this.setState({ visible: !this.state.visible });
 	}
 
 	/**
 	 * @method
 	 * @param {object} value Map of key and value: {key: "somekey", value: "somevalue"}
 	 */
-	handleOptionsChange(value) {
+	handleOptionsChange = (value) => {
 		this.setState({ visible: false });
 
 		// If the options prop is an array of strings, return a string.
@@ -77,7 +66,7 @@ class Select extends React.Component {
 	render() {
 		const options = this.state.visible ?
 			<Options
-				onChange={this.handleOptionsChange.bind(this)}
+				onChange={this.handleOptionsChange}
 				sort={this.props.sort}
 				sortRelevance={this.props.sortRelevance}
 				value={castKeyValue(this.props.value)}
@@ -101,10 +90,13 @@ class Select extends React.Component {
 			<div className="hire-select" ref="select">
 				<div
 					className="input-container"
-					onClick={this.handleInputClick.bind(this)}>
+					onClick={this.handleInputClick}
+				>
 					<div className={cx({
-						"input": true,
-						"placeholder": value === ''})}>
+						input: true,
+						placeholder: value === '',
+					})}
+					>
 						{inputValue}
 					</div>
 					<button>▾</button>
