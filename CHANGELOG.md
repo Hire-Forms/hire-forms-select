@@ -1,3 +1,6 @@
+### v2.2.1	(2016/5/19 14:41)
+* Bump packages and code clean up
+
 ### v2.2.0	(2016/5/10 10:18)
 * Add method for hiding <Options/>
 
