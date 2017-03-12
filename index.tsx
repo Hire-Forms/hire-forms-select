@@ -10,7 +10,7 @@ interface IKeyValue {
 interface IProps {
 	async?: (done: (response: IKeyValue[]) => void) => void;
 	onChange: (ev: any) => void;
-	optionComponent: React.StatelessComponent<IOptionComponentProps>;
+	optionComponent?: React.StatelessComponent<IOptionComponentProps>;
 	options: IKeyValue[];
 	placeholder?: string;
 	sort?: boolean;
