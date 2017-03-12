@@ -1,3 +1,6 @@
+### v2.2.3	(2017/3/12 8:51)
+* Bump hire-forms-options
+
 ### v2.2.2	(2017/3/12 8:36)
 * Move to typescript
 
