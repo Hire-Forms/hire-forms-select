@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as cx from 'classnames';
-import Options from 'hire-forms-options';
+import Options, { IOptionComponentProps } from 'hire-forms-options';
 
 interface IKeyValue {
 	key: string | number;
@@ -10,6 +10,7 @@ interface IKeyValue {
 interface IProps {
 	async?: (done: (response: IKeyValue[]) => void) => void;
 	onChange: (ev: any) => void;
+	optionComponent: React.StatelessComponent<IOptionComponentProps>;
 	options: IKeyValue[];
 	placeholder?: string;
 	sort?: boolean;
@@ -69,10 +70,6 @@ class Select extends React.Component<IProps, IState> {
 		this.setState({ visible: !this.state.visible });
 	};
 
-	/**
-	 * @method
-	 * @param {object} value Map of key and value: {key: "somekey", value: "somevalue"}
-	 */
 	private handleOptionsChange = (option: IKeyValue) => {
 		this.setState({ visible: false });
 		this.props.onChange(option.value);
@@ -86,6 +83,7 @@ class Select extends React.Component<IProps, IState> {
 		const options = this.state.visible ?
 			<Options
 				onChange={this.handleOptionsChange}
+				optionComponent={this.props.optionComponent}
 				sort={this.props.sort}
 				sortRelevance={this.props.sortRelevance}
 				value={this.props.value}
@@ -95,7 +93,6 @@ class Select extends React.Component<IProps, IState> {
 			</Options> :
 			null;
 
-		// Create new var so we can check value in cx()
 		const inputValue = (this.props.value.value === '') ?
 			this.props.placeholder :
 			this.props.value.value;
@@ -126,17 +123,6 @@ class Select extends React.Component<IProps, IState> {
 	}
 }
 
-//
-// Select.propTypes = {
-// 	async: React.PropTypes.func,
-// 	children: React.PropTypes.node,
-// 	onChange: React.PropTypes.func.isRequired,
-// 	options: arrayOfStringsOrArrayOfKeyValueMaps,
-// 	placeholder: React.PropTypes.string,
-// 	sort: React.PropTypes.bool,
-// 	sortRelevance: React.PropTypes.bool,
-// 	value: stringOrKeyValueMap,
-// };
 const isKeyValueMap = (map: any) =>
 	(map != null) && map.hasOwnProperty("key") && map.hasOwnProperty("value");
 

@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "hire-forms-options": "^2.2.4",
+    "hire-forms-options": "^2.2.5",
     "react": "^15.4.2"
   }
 }
