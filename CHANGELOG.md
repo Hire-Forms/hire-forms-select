@@ -1,3 +1,6 @@
+### v2.2.2	(2017/3/12 8:36)
+* Move to typescript
+
 ### v2.2.1	(2016/5/19 14:41)
 * Bump packages and code clean up
 
