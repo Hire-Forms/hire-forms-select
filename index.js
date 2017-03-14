@@ -20,7 +20,7 @@ class Select extends React.Component {
         this.handleInputClick = () => {
             this.setState({ visible: !this.state.visible });
         };
-        this.handleOptionsChange = (option) => {
+        this.handleOptionsSelect = (option) => {
             this.setState({ visible: false });
             this.props.onChange(option.value);
         };
@@ -48,7 +48,7 @@ class Select extends React.Component {
     }
     render() {
         const options = this.state.visible ?
-            React.createElement(hire_forms_options_1.default, { onChange: this.handleOptionsChange, optionComponent: this.props.optionComponent, sort: this.props.sort, sortRelevance: this.props.sortRelevance, value: this.props.value, values: this.state.options }, this.props.children) :
+            React.createElement(hire_forms_options_1.default, { onSelect: this.handleOptionsSelect, optionComponent: this.props.optionComponent, sort: this.props.sort, sortRelevance: this.props.sortRelevance, value: this.props.value, values: this.state.options }, this.props.children) :
             null;
         const inputValue = (this.props.value.value === '') ?
             this.props.placeholder :

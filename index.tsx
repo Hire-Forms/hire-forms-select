@@ -70,7 +70,7 @@ class Select extends React.Component<IProps, IState> {
 		this.setState({ visible: !this.state.visible });
 	};
 
-	private handleOptionsChange = (option: IKeyValue) => {
+	private handleOptionsSelect = (option: IKeyValue) => {
 		this.setState({ visible: false });
 		this.props.onChange(option.value);
 	};
@@ -82,7 +82,7 @@ class Select extends React.Component<IProps, IState> {
 	public render() {
 		const options = this.state.visible ?
 			<Options
-				onChange={this.handleOptionsChange}
+				onSelect={this.handleOptionsSelect}
 				optionComponent={this.props.optionComponent}
 				sort={this.props.sort}
 				sortRelevance={this.props.sortRelevance}
