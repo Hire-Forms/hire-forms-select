@@ -1,3 +1,6 @@
+### v2.2.7	(2017/3/14 18:30)
+* HireForms Options uses onSelect instead of onChange
+
 ### v2.2.6	(2017/3/12 13:9)
 * OptionComponent is not required
 
