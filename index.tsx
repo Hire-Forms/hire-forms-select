@@ -9,6 +9,7 @@ interface IKeyValue {
 
 interface IProps {
 	async?: (done: (response: IKeyValue[]) => void) => void;
+	className?: string;
 	onChange: (ev: any) => void;
 	optionComponent?: React.StatelessComponent<IOptionComponentProps>;
 	options: IKeyValue[];
@@ -99,7 +100,7 @@ class Select extends React.Component<IProps, IState> {
 
 		return (
 			<div
-				className="hire-select"
+				className={cx('hire-forms-select', this.props.className)}
 				ref={(node) => {
 					this.node = node;
 				}}

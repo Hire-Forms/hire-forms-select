@@ -53,7 +53,7 @@ class Select extends React.Component {
         const inputValue = (this.props.value.value === '') ?
             this.props.placeholder :
             this.props.value.value;
-        return (React.createElement("div", { className: "hire-select", ref: (node) => {
+        return (React.createElement("div", { className: cx('hire-forms-select', this.props.className), ref: (node) => {
                 this.node = node;
             } },
             React.createElement("div", { className: "input-container", onClick: this.handleInputClick },
