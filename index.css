@@ -1,6 +1,14 @@
+.hire-forms-select {
+    position: relative;
+}
+
 .hire-forms-select .input-container {
     border-bottom: 1px solid #444;
 }
+
+
+/* INPUT & BUTTON*/
+
 .hire-forms-select button {
     background: none;
     border: none;
@@ -18,13 +26,21 @@
     padding-left: 0.2em;
     width: 90%;
 }
+
+
+/* OPTIONS */
+
 .hire-forms-select .hire-options {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
     background: #EEE;
     border: 1px solid #CCC;
+    box-sizing: border-box;
+    list-style: none;
+    margin: 0;
+    max-height: 20em;
+    overflow: auto;
+    padding: 0;
+    position: absolute;
+    width: 100%;
 }
 .hire-forms-select .hire-options li {
     border-bottom: 2px solid white;
