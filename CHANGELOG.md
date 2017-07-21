@@ -1,3 +1,13 @@
+### v2.2.10	(2017/7/7 17:3)
+* Fix options CSS
+
+### v2.2.9	(2017/7/7 16:32)
+
+
+### v2.2.8	(2017/7/7 16:32)
+* Add CSS
+* Add className prop
+
 ### v2.2.7	(2017/3/14 18:30)
 * HireForms Options uses onSelect instead of onChange
 
