@@ -2,12 +2,12 @@ import * as React from 'react';
 import * as cx from 'classnames';
 import Options, { IOptionComponentProps } from 'hire-forms-options';
 
-interface IKeyValue {
+export interface IKeyValue {
 	key: string | number;
 	value: string;
 }
 
-interface IProps {
+export interface IProps {
 	async?: (done: (response: IKeyValue[]) => void) => void;
 	className?: string;
 	onChange: (ev: any) => void;
@@ -19,7 +19,7 @@ interface IProps {
 	value: IKeyValue;
 }
 
-interface IState {
+export interface IState {
 	options: IKeyValue[];
 	visible: boolean;
 }
