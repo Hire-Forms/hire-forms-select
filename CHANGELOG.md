@@ -1,3 +1,9 @@
+### v2.2.11	(2018/4/23 16:14)
+* Update deps and move react to peerdep
+* Merge
+* Add lock file
+* Add cursor pointer
+
 ### v2.2.10	(2017/7/7 17:3)
 * Fix options CSS
 
