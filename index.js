@@ -47,12 +47,6 @@ class Select extends React.Component {
         this.setState({ visible: false });
     }
     render() {
-        const options = this.state.visible ?
-            React.createElement(hire_forms_options_1.default, { onSelect: this.handleOptionsSelect, optionComponent: this.props.optionComponent, sort: this.props.sort, sortRelevance: this.props.sortRelevance, value: this.props.value, values: this.state.options }, this.props.children) :
-            null;
-        const inputValue = (this.props.value.value === '') ?
-            this.props.placeholder :
-            this.props.value.value;
         return (React.createElement("div", { className: cx('hire-forms-select', this.props.className), ref: (node) => {
                 this.node = node;
             } },
@@ -60,9 +54,12 @@ class Select extends React.Component {
                 React.createElement("div", { className: cx({
                         input: true,
                         placeholder: this.props.value.value === '',
-                    }) }, inputValue),
+                    }) }, (this.props.value.value === '') ?
+                    this.props.placeholder :
+                    this.props.value.value),
                 React.createElement("button", null, "\u25BE")),
-            options));
+            this.state.visible &&
+                React.createElement(hire_forms_options_1.default, { onSelect: this.handleOptionsSelect, optionComponent: this.props.optionComponent, sortOn: this.props.sortOn, value: this.props.value, values: this.state.options }, this.props.children)));
     }
 }
 Select.defaultProps = {

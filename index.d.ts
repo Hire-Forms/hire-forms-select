@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as React from 'react';
-import { IOptionComponentProps } from 'hire-forms-options';
+import { IOptionComponentProps, SortTypes } from 'hire-forms-options';
 export interface IKeyValue {
     key: string | number;
     value: string;
@@ -12,7 +12,7 @@ export interface IProps {
     optionComponent?: React.StatelessComponent<IOptionComponentProps>;
     options: IKeyValue[];
     placeholder?: string;
-    sort?: boolean;
+    sortOn?: SortTypes;
     sortRelevance?: boolean;
     value: IKeyValue;
 }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as cx from 'classnames';
-import Options, { IOptionComponentProps } from 'hire-forms-options';
+import Options, { IOptionComponentProps, SortTypes } from 'hire-forms-options';
 
 export interface IKeyValue {
 	key: string | number;
@@ -8,15 +8,15 @@ export interface IKeyValue {
 }
 
 export interface IProps {
-	async?: (done: (response: IKeyValue[]) => void) => void;
-	className?: string;
-	onChange: (ev: any) => void;
-	optionComponent?: React.StatelessComponent<IOptionComponentProps>;
-	options: IKeyValue[];
-	placeholder?: string;
-	sort?: boolean;
-	sortRelevance?: boolean;
-	value: IKeyValue;
+	async?: (done: (response: IKeyValue[]) => void) => void
+	className?: string
+	onChange: (ev: any) => void
+	optionComponent?: React.StatelessComponent<IOptionComponentProps>
+	options: IKeyValue[]
+	placeholder?: string
+	sortOn?: SortTypes
+	sortRelevance?: boolean
+	value: IKeyValue
 }
 
 export interface IState {
@@ -81,23 +81,6 @@ class Select extends React.Component<IProps, IState> {
 	}
 
 	public render() {
-		const options = this.state.visible ?
-			<Options
-				onSelect={this.handleOptionsSelect}
-				optionComponent={this.props.optionComponent}
-				sort={this.props.sort}
-				sortRelevance={this.props.sortRelevance}
-				value={this.props.value}
-				values={this.state.options}
-			>
-				{this.props.children}
-			</Options> :
-			null;
-
-		const inputValue = (this.props.value.value === '') ?
-			this.props.placeholder :
-			this.props.value.value;
-
 		return (
 			<div
 				className={cx('hire-forms-select', this.props.className)}
@@ -114,11 +97,26 @@ class Select extends React.Component<IProps, IState> {
 						placeholder: this.props.value.value === '',
 					})}
 					>
-						{inputValue}
+						{
+							(this.props.value.value === '') ?
+								this.props.placeholder :
+								this.props.value.value
+						}
 					</div>
 					<button>▾</button>
 				</div>
-				{options}
+				{
+					this.state.visible &&
+					<Options
+						onSelect={this.handleOptionsSelect}
+						optionComponent={this.props.optionComponent}
+						sortOn={this.props.sortOn}
+						value={this.props.value}
+						values={this.state.options}
+					>
+						{this.props.children}
+					</Options>
+				}
 			</div>
 		);
 	}

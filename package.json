@@ -3,6 +3,7 @@
   "version": "2.2.11",
   "description": "",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "bump": "hi-bump",
     "build": "tsc",
