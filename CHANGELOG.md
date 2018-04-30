@@ -1,3 +1,6 @@
+### v2.2.12	(2018/4/30 16:46)
+* Clean up
+
 ### v2.2.11	(2018/4/23 16:14)
 * Update deps and move react to peerdep
 * Merge
