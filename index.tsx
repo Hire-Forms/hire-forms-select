@@ -67,7 +67,7 @@ class Select extends React.Component<IProps, IState> {
 		}
 	};
 
-	private handleInputClick = (/* ev */) => {
+	private handleInputClick = (_ev) => {
 		this.setState({ visible: !this.state.visible });
 	};
 

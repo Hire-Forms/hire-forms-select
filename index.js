@@ -17,7 +17,7 @@ class Select extends React.Component {
                 });
             }
         };
-        this.handleInputClick = () => {
+        this.handleInputClick = (_ev) => {
             this.setState({ visible: !this.state.visible });
         };
         this.handleOptionsSelect = (option) => {
