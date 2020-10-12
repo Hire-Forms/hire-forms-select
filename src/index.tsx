@@ -41,16 +41,17 @@ export default function HireFormsSelect(props: Props) {
 		props.onChange(option)
 	}, [visible])
 
-	const handleDocumentClick = React.useCallback((ev: MouseEvent) => {
-		if (visible && !ref.current.contains(ev.target as Node)) {
-			setVisible(false)
-		}
-	}, [visible])
-
 	React.useEffect(() => {
+		function handleDocumentClick(ev: MouseEvent) {
+			if (!visible) return
+
+			if (!ref.current.contains(ev.target as Node)) {
+				setVisible(false)
+			}
+		}
 		document.addEventListener('click', handleDocumentClick);
 		() => document.removeEventListener('click', handleDocumentClick)
-	}, [])
+	}, [visible])
 
 	return (
 		<Wrapper
