@@ -1,9 +1,9 @@
 {
   "name": "hire-forms-select",
-  "version": "2.2.12",
+  "version": "3.0.0",
   "description": "",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
   "scripts": {
     "bump": "hi-bump",
     "build": "tsc",
@@ -19,16 +19,16 @@
     "url": "https://github.com/Hire-Forms/hire-forms-select/issues"
   },
   "homepage": "https://github.com/Hire-Forms/hire-forms-select",
-  "devDependencies": {
-    "@types/react": "^16.3.12",
-    "hi-bump": "^1.1.1",
-    "typescript": "^2.8.3"
-  },
   "dependencies": {
-    "classnames": "^2.2.5",
-    "hire-forms-options": "^2.2.5"
+    "classnames": "^2.2.6",
+    "hire-forms-options": "^2.2.6"
   },
-  "peerDependencies": {
-    "react": "^16.3.2"
+  "devDependencies": {
+    "@types/classnames": "^2.2.10",
+    "@types/react": "^16.9.32",
+    "@types/styled-components": "^5.0.1",
+    "react": "^16.13.1",
+    "styled-components": "^5.0.1",
+    "typescript": "4.0.3"
   }
 }
